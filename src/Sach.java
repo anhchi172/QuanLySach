@@ -1,5 +1,6 @@
 import java.util.*;
-public class Sach extends QuanLySach {
+
+public class Sach extends TaiLieu {
    private String tacGia;
    private int soTrang;
    public Sach (int ma, String ten, int so, String t, int s){
@@ -8,25 +9,34 @@ public class Sach extends QuanLySach {
       soTrang = s;
    }
 
-public void setTacGia(String t){
-tacGia = t;
-}
+    public void setTacGia(String t) {
+        tacGia = t;
+    }
 
-public void setSoTrang(int s){
-soTrang = s;
-}
+    public void setSoTrang(int s) {
+        soTrang = s;
+    }
 
-public String getTacGia(){
-return tacGia;
-}
-public int getSoTrang(){
-return soTrang;
-}
-public static void hienThiTaiLieu(HashSet<Sach> al){
-for(Sach i: al){
+    public String getTacGia() {
+        return tacGia;
+    }
+
+    public int getSoTrang() {
+        return soTrang;
+    }
+/*   @Overide
+public void hienThiTaiLieu(){
+
+   for(Sach i: hs){
    
-   System.out.print("The loai: Sach\nMa tai lieu: " + i.getMaTaiLieu() +"\nNha xuat ban: " + i.getNhaXuatBan()+ "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ "\nTac gia" + i.getTacGia() + "\nSo Trang: " + i.getSoTrang());
+   System.out.print("\nMa tai lieu: " + i.getMaTaiLieu() +
+                       "\nNha xuat ban: " + i.getNhaXuatBan()+ 
+                       "\nBan Phat Hanh: " +  i.getBanPhatHanh());
+                        "\nTac gia" + i.getTacGia() + 
+                        "\nSo Trang: " + i.getSoTrang());
    }
+   
 
-}
+
+}*/
 }

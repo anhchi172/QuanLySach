@@ -3,8 +3,8 @@ public class QuanLySachTester{
 
    public static void main (String [] args) {
       Scanner scan = new Scanner(System.in);
-   
-      HashSet<QuanLySach> set = new HashSet<>();
+       QuanLySach hs = new QuanLySach();
+       //HashSet<QuanLySach> set = new HashSet<>();
       int act;
       do{
          System.out.println("Chon thao tac can thuc hien:\n1. Them moi\n2. Xoa\n3. Hien thi\n4. Tim kiem\n5. Thoat");
@@ -13,45 +13,44 @@ public class QuanLySachTester{
             System.out.println("Chon \n1.Sach\n2.Tap chi\n3.Bao");
             int choice = checkInput(1,3);
             if (choice == 1)
-            { 
-               Sach sach = new Sach(nhapMa(), nhapTen(), nhapSo(), nhapTacGia(), nhapSoTrang());
-               set.add(sach);
+            {
+                TaiLieu sach = new Sach(nhapMa(), nhapTen(), nhapSo(), nhapTacGia(), nhapSoTrang());
+                hs.add(sach);
                System.out.println("Da them sach vao kho du lieu");
                
             }
             
             else if (choice == 2){
-               TapChi tapchi = new TapChi(nhapMa(), nhapTen(), nhapSo(), nhapSoPhatHanh(), nhapThangPhatHanh());
-               set.add(tapchi);
+                TaiLieu tapchi = new TapChi(nhapMa(), nhapTen(), nhapSo(), nhapSoPhatHanh(), nhapThangPhatHanh());
+                hs.add(tapchi);
                System.out.println("Da them tap chi vao kho du lieu");
             }
             
             else {
-               Bao bao = new Bao(nhapMa(), nhapTen(), nhapSo(), nhapNgayPhatHanh());
-               set.add(bao);
+                TaiLieu bao = new Bao(nhapMa(), nhapTen(), nhapSo(), nhapNgayPhatHanh());
+                hs.add(bao);
                System.out.println("Da them bao vao kho du lieu");
             }
          }
          
          else if (act == 2){
             int ma = nhapMa();
-            QuanLySach.xoaTaiLieu(set, ma);
+             hs.xoaTaiLieu(ma);
          }
          
          else if (act == 3){
-            QuanLySach.hienThiTaiLieu(set);
+             hs.hienThiTaiLieu();
          }
          
          else if (act == 4){
             System.out.print("Nhap loai can tim (vd: Sach, TapChi, Bao): ");
             String type = scan.next();
-            QuanLySach.timTheoLoai(set, type);
+             hs.timTheoLoai(type);
          }
    
       
       }while (act!=5);
-   
-      QuanLySach.exit();
+       hs.exit();
    }
    
    public static int nhapMa(){
@@ -70,7 +69,7 @@ public class QuanLySachTester{
    public static int nhapSo(){
       Scanner scan = new Scanner(System.in);
       System.out.print("Nhap so ban phat hanh: ");
-      int so = scan.nextInt();
+       int so = checkInput(1, Integer.MAX_VALUE);
       return so;
    }
    public static String nhapTacGia(){
@@ -83,26 +82,26 @@ public class QuanLySachTester{
    public static int nhapSoTrang(){
       Scanner scan = new Scanner(System.in);
       System.out.print("Nhap so trang: ");
-      int trang = scan.nextInt();
+       int trang = checkInput(1, Integer.MAX_VALUE);
       return trang;
    }
    public static int nhapSoPhatHanh(){
       Scanner scan = new Scanner(System.in);
       System.out.print("Nhap so phat hanh: ");
-      int so = scan.nextInt();
+       int so = checkInput(1, Integer.MAX_VALUE);
       return so;
    }
 
    public static int nhapThangPhatHanh(){
       Scanner scan = new Scanner(System.in);
       System.out.print("Nhap thang phat hanh: ");
-      int thang = scan.nextInt();
+       int thang = checkInput(1, 12);
       return thang;
    }
    public static int nhapNgayPhatHanh(){
       Scanner scan = new Scanner(System.in);
       System.out.print("Nhap ngay phat hanh: ");
-      int ngay = scan.nextInt();
+       int ngay = checkInput(1, 31);
       return ngay;
    }
 

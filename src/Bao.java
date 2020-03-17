@@ -1,5 +1,6 @@
 import java.util.*;
-public class Bao extends QuanLySach {
+
+public class Bao extends TaiLieu {
    private int ngayPhatHanh;
    public Bao(int ma, String ten, int so,int n){
       super(ma, ten, so);
@@ -7,17 +8,17 @@ public class Bao extends QuanLySach {
    }
    
    public int getNgayPhatHanh(){
-   return ngayPhatHanh;
+       return ngayPhatHanh;
    }
    
-public static void hienThiTaiLieu(HashSet<QuanLySach> al){
-for(QuanLySach i: al){
-   
-   System.out.print("The loai: Bao\nMa tai lieu: " + i.getMaTaiLieu() +
+   /*public static void hienThiTaiLieu(HashSet<QuanLySach> al){
+      for(TaiLieu i: al){
+      
+         System.out.print("The loai: Bao\nMa tai lieu: " + i.getMaTaiLieu() +
                     "\nNha xuat ban: " + i.getNhaXuatBan()+ 
                     "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ 
                     "\nNgay Phat Hanh: " + i.getNgayPhatHanh);
-}
-
-}
+      }
+   
+   }*/
 }
