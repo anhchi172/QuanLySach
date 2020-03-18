@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class TaiLieu {
     private int maTaiLieu;
     private String nhaXuatBan;
@@ -33,5 +35,19 @@ public class TaiLieu {
         banPhatHanh = b;
     }
 
+    @Override
+    public boolean equals(Object obj) {
 
+        TaiLieu tl = (TaiLieu) obj;
+        if (tl != null) {
+            return tl.getMaTaiLieu() == maTaiLieu;
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maTaiLieu);
+    }
 }

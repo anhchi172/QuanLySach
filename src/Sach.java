@@ -24,16 +24,21 @@ public class Sach extends TaiLieu {
     public int getSoTrang() {
         return soTrang;
     }
+
+    @Override
+    public String toString() {
+        return ("\nThe loai: Sach Ma tai lieu: " + getMaTaiLieu() +
+                " Nha xuat ban: " + getNhaXuatBan() +
+                " Ban Phat Hanh: " + getBanPhatHanh() +
+                " Tac gia" + getTacGia() +
+                " So Trang: " + getSoTrang());
+    }
 /*   @Overide
 public void hienThiTaiLieu(){
 
    for(Sach i: hs){
    
-   System.out.print("\nMa tai lieu: " + i.getMaTaiLieu() +
-                       "\nNha xuat ban: " + i.getNhaXuatBan()+ 
-                       "\nBan Phat Hanh: " +  i.getBanPhatHanh());
-                        "\nTac gia" + i.getTacGia() + 
-                        "\nSo Trang: " + i.getSoTrang());
+   System.out.print
    }
    
 

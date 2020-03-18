@@ -16,9 +16,19 @@ public class TapChi extends TaiLieu {
    public int getThangPhatHanh() {
       return thangPhatHanh;
    }
+
+   @Override
+   public String toString() {
+      return ("\nThe loai: Tap chi" +
+              " Ma tai lieu: " + getMaTaiLieu() +
+              " Nha xuat ban: " + getNhaXuatBan() +
+              " Ban Phat Hanh: " + getBanPhatHanh() +
+              " So Phat Hanh: " + getSoPhatHanh() +
+              " Thang Phat Hanh: " + getThangPhatHanh());
+   }
    /*public static void hienThiTaiLieu(){
       for(TaiLi i: al){
-         System.out.print("The loai: Tap chi\nMa tai lieu: " + i.getMaTaiLieu() +"\nNha xuat ban: " + i.getNhaXuatBan()+ "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ "\nSo Phat Hanh: " + soPhatHanh + "\nThang Phat Hanh: " + thangPhatHanh);
+
       }
    
    }*/

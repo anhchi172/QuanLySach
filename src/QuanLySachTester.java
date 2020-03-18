@@ -7,7 +7,7 @@ public class QuanLySachTester{
        //HashSet<QuanLySach> set = new HashSet<>();
       int act;
       do{
-         System.out.println("Chon thao tac can thuc hien:\n1. Them moi\n2. Xoa\n3. Hien thi\n4. Tim kiem\n5. Thoat");
+         System.out.println("\nChon thao tac can thuc hien:\n1. Them moi\n2. Xoa\n3. Hien thi\n4. Tim kiem\n5. Thoat");
       act = checkInput(1,5);
          if (act ==1){
             System.out.println("Chon \n1.Sach\n2.Tap chi\n3.Bao");
@@ -19,7 +19,7 @@ public class QuanLySachTester{
                System.out.println("Da them sach vao kho du lieu");
                
             }
-            
+
             else if (choice == 2){
                 TaiLieu tapchi = new TapChi(nhapMa(), nhapTen(), nhapSo(), nhapSoPhatHanh(), nhapThangPhatHanh());
                 hs.add(tapchi);
@@ -107,14 +107,20 @@ public class QuanLySachTester{
 
    private static int checkInput(int a, int b){
       Scanner scan = new Scanner (System.in);
-      int choice = scan.nextInt();
-   
-      while (choice<a || choice>b){
+      try {
+         int choice = scan.nextInt();
+
+         while (choice < a || choice > b) {
+            System.out.println("Du lieu nhap khong phu hop voi yeu cau. Vui long nhap lai:");
+            choice = scan.nextInt();
+         }
+
+
+         return choice;
+      } catch (Exception e) {
          System.out.println("Du lieu nhap khong phu hop voi yeu cau. Vui long nhap lai:");
-         choice = scan.nextInt();
+         return checkInput(a, b);
       }
-   
-      return choice;
    }
 
 }
