@@ -1,14 +1,17 @@
 import java.util.*;
 public class QuanLySach {
     // Loi: HashSet theo e hieu se ko co duplicate, nhung khi test dien 2 ma tai lieu giong nhau he thong ko tra ve loi
-    private HashSet<TaiLieu> hs;
+    private ArrayList<TaiLieu> hs;
+    private TaiLieuDao taiLieuDao;
 
     public QuanLySach() {
-        hs = new HashSet<TaiLieu>();
+        taiLieuDao = new TaiLieuDao();
+        hs = (ArrayList<TaiLieu>) taiLieuDao.read();
    }
 
     public void add(TaiLieu l) {
         hs.add(l);
+        taiLieuDao.write((List<TaiLieu>) hs);
    }
 
     // Loi: code chay, nhung khi goi method hien thi tai lieu da xoa van con
@@ -17,6 +20,7 @@ public class QuanLySach {
         TaiLieu tl = hs.stream().filter(TaiLieu -> TaiLieu.getMaTaiLieu() == m).findFirst().orElse(null);
         if (tl != null) {
             hs.remove(tl);
+            taiLieuDao.write((List<TaiLieu>) hs);
             System.out.println("Da xoa tai lieu voi ma: " + m);
         } else {
             System.out.println("Ko tim duoc tai lieu voi ma da nhap");
