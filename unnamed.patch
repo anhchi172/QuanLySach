@@ -1,0 +1,421 @@
+Index: src/Bao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Bao.java	(revision 74c79904fbb4a8dbbb6b28795ccbd0f4735cdaef)
++++ src/Bao.java	(revision b7c955440f0e43b8c5c3dd51df24accb93451417)
+@@ -1,5 +1,6 @@
+ import java.util.*;
+-public class Bao extends QuanLySach {
++
++public class Bao extends TaiLieu {
+    private int ngayPhatHanh;
+    public Bao(int ma, String ten, int so,int n){
+       super(ma, ten, so);
+@@ -7,17 +8,17 @@
+    }
+    
+    public int getNgayPhatHanh(){
+-   return ngayPhatHanh;
++       return ngayPhatHanh;
+    }
+    
+-public static void hienThiTaiLieu(HashSet<QuanLySach> al){
+-for(QuanLySach i: al){
+-   
+-   System.out.print("The loai: Bao\nMa tai lieu: " + i.getMaTaiLieu() +
++   /*public static void hienThiTaiLieu(HashSet<QuanLySach> al){
++      for(TaiLieu i: al){
++      
++         System.out.print("The loai: Bao\nMa tai lieu: " + i.getMaTaiLieu() +
+                     "\nNha xuat ban: " + i.getNhaXuatBan()+ 
+                     "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ 
+                     "\nNgay Phat Hanh: " + i.getNgayPhatHanh);
+-}
+-
+-}
++      }
++   
++   }*/
+ }
+\ No newline at end of file
+Index: src/QuanLySach.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/QuanLySach.java	(revision 74c79904fbb4a8dbbb6b28795ccbd0f4735cdaef)
++++ src/QuanLySach.java	(revision b7c955440f0e43b8c5c3dd51df24accb93451417)
+@@ -1,58 +1,54 @@
+ import java.util.*;
+ public class QuanLySach {
+-   private int maTaiLieu;
+-   private String nhaXuatBan;
+-   private int banPhatHanh;
+-   public QuanLySach(int m, String n, int b){
+-      maTaiLieu = m;
+-      nhaXuatBan = n; 
+-      banPhatHanh = b;
+-   }
++    // Loi: HashSet theo e hieu se ko co duplicate, nhung khi test dien 2 ma tai lieu giong nhau he thong ko tra ve loi
++    private HashSet<TaiLieu> hs;
+ 
+-   public int getMaTaiLieu(){
+-      return maTaiLieu;
+-   }
+-   public String getNhaXuatBan(){
+-      return nhaXuatBan;
+-   }
+-   public int getBanPhatHanh(){
+-      return banPhatHanh;
+-   }
+-   public void setMaTaiLieu(int m){
+-      maTaiLieu = m;
+-   }
+-   public void setNhaXuatBan(String n){
+-      nhaXuatBan = n;
++    public QuanLySach() {
++        hs = new HashSet<TaiLieu>();
+    }
+ 
+-   public void setBanPhatHanh (int b){
+-      banPhatHanh = b;
++    public void add(TaiLieu l) {
++        hs.add(l);
+    }
+ 
+-
+-
+-   public static void xoaTaiLieu(HashSet<QuanLySach> al, int m){
+-      for (int i = 0; i< al.size(); i++){
+-         if (al.contains(m)){
+-            al.remove(i);
++    // Loi: code chay, nhung khi goi method hien thi tai lieu da xoa van con
++    public void xoaTaiLieu(int m) {
++        for (int i = 0; i < hs.size(); i++) {
++            if (hs.contains(m)) {
++                hs.remove(i);
+          }
+       }
+       System.out.println("Da xoa tai lieu voi ma: "+ m);
+    }
+ 
+-   public static void hienThiTaiLieu(HashSet<QuanLySach> al){
+-   //Iterator<QuanLySach> i = al.iterator();
+-   for(QuanLySach i: al){
+-   
+-   System.out.println("\nMa tai lieu: " + i.getMaTaiLieu() +
++    public void hienThiTaiLieu() {
++
++        for (TaiLieu i : hs) {
++
++            System.out.print("\nMa tai lieu: " + i.getMaTaiLieu() +
+                        "\nNha xuat ban: " + i.getNhaXuatBan()+ 
+                        "\nBan Phat Hanh: " +  i.getBanPhatHanh());
++     /*Loi khi chay doan code duoi vi method getTenTacGia cua class Sach, nhung Java ko cho multi class inheritance. Em chua nghi ra cach de hien thi cac thuoc tinh cua moi the loai subclass
++                    
++    System.out.println("***" + i.getClass().getName());
++    if (i.getClass().getName().equals("Sach")){
++   System.out.println("\nTac gia" + i.getTacGia() + "\nSo Trang: " + i.getSoTrang());
++   }
++   
++   else if (i.getClass().getName().equals("Bao")){
++   System.out.println("\nNgay Phat Hanh: " + i.getNgayPhatHanh());
++   }
++   else {
++     System.out.println("\nSo Phat Hanh: " + i.getSoPhatHanh() + "\nThang Phat Hanh: " + i.getThangPhatHanh());
++      }*/
++
+    }
+ 
+ }
+ // Error: Return memory address/hashcode instead of String
+-   public static void timTheoLoai(HashSet<QuanLySach> al, String type){
+-      al.stream()
++//Vi du: input sach. Tra ve: Sach@6cd8737
++public void timTheoLoai(String type) {
++    hs.stream()
+          .filter(x -> x.getClass().getName().equals(type))
+          .forEach(System.out::println);
+    
+@@ -66,3 +62,4 @@
+    
+    }
+ }
++
+Index: src/QuanLySachTester.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/QuanLySachTester.java	(revision 74c79904fbb4a8dbbb6b28795ccbd0f4735cdaef)
++++ src/QuanLySachTester.java	(revision b7c955440f0e43b8c5c3dd51df24accb93451417)
+@@ -3,8 +3,8 @@
+ 
+    public static void main (String [] args) {
+       Scanner scan = new Scanner(System.in);
+-   
+-      HashSet<QuanLySach> set = new HashSet<>();
++       QuanLySach hs = new QuanLySach();
++       //HashSet<QuanLySach> set = new HashSet<>();
+       int act;
+       do{
+          System.out.println("Chon thao tac can thuc hien:\n1. Them moi\n2. Xoa\n3. Hien thi\n4. Tim kiem\n5. Thoat");
+@@ -13,45 +13,44 @@
+             System.out.println("Chon \n1.Sach\n2.Tap chi\n3.Bao");
+             int choice = checkInput(1,3);
+             if (choice == 1)
+-            { 
+-               Sach sach = new Sach(nhapMa(), nhapTen(), nhapSo(), nhapTacGia(), nhapSoTrang());
+-               set.add(sach);
++            {
++                TaiLieu sach = new Sach(nhapMa(), nhapTen(), nhapSo(), nhapTacGia(), nhapSoTrang());
++                hs.add(sach);
+                System.out.println("Da them sach vao kho du lieu");
+                
+             }
+             
+             else if (choice == 2){
+-               TapChi tapchi = new TapChi(nhapMa(), nhapTen(), nhapSo(), nhapSoPhatHanh(), nhapThangPhatHanh());
+-               set.add(tapchi);
++                TaiLieu tapchi = new TapChi(nhapMa(), nhapTen(), nhapSo(), nhapSoPhatHanh(), nhapThangPhatHanh());
++                hs.add(tapchi);
+                System.out.println("Da them tap chi vao kho du lieu");
+             }
+             
+             else {
+-               Bao bao = new Bao(nhapMa(), nhapTen(), nhapSo(), nhapNgayPhatHanh());
+-               set.add(bao);
++                TaiLieu bao = new Bao(nhapMa(), nhapTen(), nhapSo(), nhapNgayPhatHanh());
++                hs.add(bao);
+                System.out.println("Da them bao vao kho du lieu");
+             }
+          }
+          
+          else if (act == 2){
+             int ma = nhapMa();
+-            QuanLySach.xoaTaiLieu(set, ma);
++             hs.xoaTaiLieu(ma);
+          }
+          
+          else if (act == 3){
+-            QuanLySach.hienThiTaiLieu(set);
++             hs.hienThiTaiLieu();
+          }
+          
+          else if (act == 4){
+             System.out.print("Nhap loai can tim (vd: Sach, TapChi, Bao): ");
+             String type = scan.next();
+-            QuanLySach.timTheoLoai(set, type);
++             hs.timTheoLoai(type);
+          }
+    
+       
+       }while (act!=5);
+-   
+-      QuanLySach.exit();
++       hs.exit();
+    }
+    
+    public static int nhapMa(){
+@@ -70,7 +69,7 @@
+    public static int nhapSo(){
+       Scanner scan = new Scanner(System.in);
+       System.out.print("Nhap so ban phat hanh: ");
+-      int so = scan.nextInt();
++       int so = checkInput(1, Integer.MAX_VALUE);
+       return so;
+    }
+    public static String nhapTacGia(){
+@@ -83,26 +82,26 @@
+    public static int nhapSoTrang(){
+       Scanner scan = new Scanner(System.in);
+       System.out.print("Nhap so trang: ");
+-      int trang = scan.nextInt();
++       int trang = checkInput(1, Integer.MAX_VALUE);
+       return trang;
+    }
+    public static int nhapSoPhatHanh(){
+       Scanner scan = new Scanner(System.in);
+       System.out.print("Nhap so phat hanh: ");
+-      int so = scan.nextInt();
++       int so = checkInput(1, Integer.MAX_VALUE);
+       return so;
+    }
+ 
+    public static int nhapThangPhatHanh(){
+       Scanner scan = new Scanner(System.in);
+       System.out.print("Nhap thang phat hanh: ");
+-      int thang = scan.nextInt();
++       int thang = checkInput(1, 12);
+       return thang;
+    }
+    public static int nhapNgayPhatHanh(){
+       Scanner scan = new Scanner(System.in);
+       System.out.print("Nhap ngay phat hanh: ");
+-      int ngay = scan.nextInt();
++       int ngay = checkInput(1, 31);
+       return ngay;
+    }
+ 
+Index: src/Sach.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Sach.java	(revision 74c79904fbb4a8dbbb6b28795ccbd0f4735cdaef)
++++ src/Sach.java	(revision b7c955440f0e43b8c5c3dd51df24accb93451417)
+@@ -1,5 +1,6 @@
+ import java.util.*;
+-public class Sach extends QuanLySach {
++
++public class Sach extends TaiLieu {
+    private String tacGia;
+    private int soTrang;
+    public Sach (int ma, String ten, int so, String t, int s){
+@@ -8,25 +9,34 @@
+       soTrang = s;
+    }
+ 
+-public void setTacGia(String t){
+-tacGia = t;
+-}
++    public void setTacGia(String t) {
++        tacGia = t;
++    }
+ 
+-public void setSoTrang(int s){
+-soTrang = s;
+-}
++    public void setSoTrang(int s) {
++        soTrang = s;
++    }
+ 
+-public String getTacGia(){
+-return tacGia;
+-}
+-public int getSoTrang(){
+-return soTrang;
+-}
+-public static void hienThiTaiLieu(HashSet<Sach> al){
+-for(Sach i: al){
+-   
+-   System.out.print("The loai: Sach\nMa tai lieu: " + i.getMaTaiLieu() +"\nNha xuat ban: " + i.getNhaXuatBan()+ "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ "\nTac gia" + i.getTacGia() + "\nSo Trang: " + i.getSoTrang());
+-   }
+-
+-}
++    public String getTacGia() {
++        return tacGia;
++    }
++
++    public int getSoTrang() {
++        return soTrang;
++    }
++/*   @Overide
++public void hienThiTaiLieu(){
++
++   for(Sach i: hs){
++   
++   System.out.print("\nMa tai lieu: " + i.getMaTaiLieu() +
++                       "\nNha xuat ban: " + i.getNhaXuatBan()+ 
++                       "\nBan Phat Hanh: " +  i.getBanPhatHanh());
++                        "\nTac gia" + i.getTacGia() + 
++                        "\nSo Trang: " + i.getSoTrang());
++   }
++   
++
++
++}*/
+ }
+\ No newline at end of file
+Index: src/TaiLieu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/TaiLieu.java	(revision b7c955440f0e43b8c5c3dd51df24accb93451417)
++++ src/TaiLieu.java	(revision b7c955440f0e43b8c5c3dd51df24accb93451417)
+@@ -0,0 +1,37 @@
++public class TaiLieu {
++    private int maTaiLieu;
++    private String nhaXuatBan;
++    private int banPhatHanh;
++
++    public TaiLieu(int m, String n, int b) {
++        maTaiLieu = m;
++        nhaXuatBan = n;
++        banPhatHanh = b;
++    }
++
++    public int getMaTaiLieu() {
++        return maTaiLieu;
++    }
++
++    public String getNhaXuatBan() {
++        return nhaXuatBan;
++    }
++
++    public int getBanPhatHanh() {
++        return banPhatHanh;
++    }
++
++    public void setMaTaiLieu(int m) {
++        maTaiLieu = m;
++    }
++
++    public void setNhaXuatBan(String n) {
++        nhaXuatBan = n;
++    }
++
++    public void setBanPhatHanh(int b) {
++        banPhatHanh = b;
++    }
++
++
++}
+\ No newline at end of file
+Index: src/TapChi.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/TapChi.java	(revision 74c79904fbb4a8dbbb6b28795ccbd0f4735cdaef)
++++ src/TapChi.java	(revision b7c955440f0e43b8c5c3dd51df24accb93451417)
+@@ -1,5 +1,6 @@
+ import java.util.*;
+-public class TapChi extends QuanLySach{
++
++public class TapChi extends TaiLieu {
+    private int soPhatHanh;
+    private int thangPhatHanh;
+    public TapChi(int ma, String ten, int so, int s, int t){
+@@ -7,14 +8,20 @@
+       soPhatHanh = s;
+       thangPhatHanh = t;
+    }
+-   
+-   public static void hienThiTaiLieu(HashSet<QuanLySach> al){
+-for(QuanLySach i: al){
+-   
+-   System.out.print("The loai: Tap chi\nMa tai lieu: " + i.getMaTaiLieu() +"\nNha xuat ban: " + i.getNhaXuatBan()+ "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ "\nSo Phat Hanh: " + soPhatHanh + "\nThang Phat Hanh: " + thangPhatHanh);
+-   }
+-
+-}
++
++   public int getSoPhatHanh() {
++      return soPhatHanh;
++   }
++
++   public int getThangPhatHanh() {
++      return thangPhatHanh;
++   }
++   /*public static void hienThiTaiLieu(){
++      for(TaiLi i: al){
++         System.out.print("The loai: Tap chi\nMa tai lieu: " + i.getMaTaiLieu() +"\nNha xuat ban: " + i.getNhaXuatBan()+ "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ "\nSo Phat Hanh: " + soPhatHanh + "\nThang Phat Hanh: " + thangPhatHanh);
++      }
++   
++   }*/
+ 
+ 
+ 

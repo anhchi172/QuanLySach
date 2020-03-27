@@ -10,15 +10,14 @@ public class Bao extends TaiLieu {
    public int getNgayPhatHanh(){
        return ngayPhatHanh;
    }
-   
-   /*public static void hienThiTaiLieu(HashSet<QuanLySach> al){
-      for(TaiLieu i: al){
-      
-         System.out.print("The loai: Bao\nMa tai lieu: " + i.getMaTaiLieu() +
-                    "\nNha xuat ban: " + i.getNhaXuatBan()+ 
-                    "\nBan Phat Hanh: " +  i.getBanPhatHanh()+ 
-                    "\nNgay Phat Hanh: " + i.getNgayPhatHanh);
+
+    @Override
+    public String toString() {
+        return ("\nThe loai: Bao" +
+                " Ma tai lieu: " + getMaTaiLieu() +
+                " Nha xuat ban: " + getNhaXuatBan() +
+                " Ban Phat Hanh: " + getBanPhatHanh() +
+                " Ngay Phat Hanh: " + getNgayPhatHanh());
       }
-   
-   }*/
+
 }
